@@ -35,16 +35,16 @@ docker create -ti -w /home/flower -v "/Volumes/shared/docker:/home/flower/shared
 docker cp $keydir/$3 $1:/home/flower
 docker cp $keydir/$3.pub $1:/home/flower
 docker cp setup.sh $1:/home/flower
-docker container start $1 
+docker container start $1
 docker exec -it $1 /bin/bash -c "sudo chown flower:flower setup.sh && sudo chmod +x setup.sh && ./setup.sh && rm ./setup.sh"
-docker stop $1 
+docker stop $1
 
 echo '# !/bin/bash' > start.sh
 echo '' >> start.sh
-echo $"docker run -ti -w /home/flower -v "/Volumes/shared/docker:/home/flower/shared" -v "/Volumes/shared/docker/work/hmrc/docker-services:/home/flower/dev/ddcnls-docker" -v $1-etc:/etc -v $1-usr:/usr -v $1-bin:/bin -v $1-var:/var -v $1-home:/home -v $1-dev:/home/flower/dev -v $1-lib:/lib --name $1 --rm lavenderflowerdew/alpine-sbt:openjdk-8-sbt-0.13.8 /bin/zsh" >> start.sh
+echo $"/usr/local/bin/docker run -ti -w /home/flower -v "/Volumes/shared/docker:/home/flower/shared" -v "/Volumes/shared/docker/work/hmrc/docker-services:/home/flower/dev/ddcnls-docker" -v $1-etc:/etc -v $1-usr:/usr -v $1-bin:/bin -v $1-var:/var -v $1-home:/home -v $1-dev:/home/flower/dev -v $1-lib:/lib --name $1 --rm lavenderflowerdew/alpine-sbt:openjdk-8-sbt-0.13.8 /bin/zsh" >> start.sh
 chmod +x start.sh
 
 echo '# !/bin/bash' > shell.sh
 echo '' >> shell.sh
 echo "/usr/local/bin/docker exec -it $1 /bin/zsh" >> shell.sh
-chmod +x shell.sh 
+chmod +x shell.sh
