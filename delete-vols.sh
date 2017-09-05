@@ -13,3 +13,4 @@ docker volume rm $1-var
 docker volume rm $1-etc
 docker volume rm $1-usr
 docker volume rm $1-dev
+docker volume rm $1-lib
